@@ -5,19 +5,31 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t* temp;
+	listint_t *head;
+	listint_t *ref = *list;
 
-	if (list == NULL)
-		exit(EXIT_SUCCESS);
-	while (list->prev != NULL)
+	if (list != NULL && *list != NULL)
 	{
-		if (list->n < list->prev->n)
+		while ((*list) != NULL)
 		{
-			list->prev->next = list->next;
-			if (list->next)
-				list->next->prev = list->prev;
-			if (list->prev->prev)
-				list->prev->prev->next = list;
-			list->prev->prev = list;
-			list->prev = 
+			head = *list;
+			while (head->prev != NULL && head->n < head->prev->n)
+			{
+				if (head->next)
+					head->next->prev = head->prev;
+				if (head->prev->prev)
+					head->prev->prev->next = head;
+				head->prev->next = head->next;
+				head->next = head->prev;
+				head->prev = head->prev->prev;
+				head->next->prev = head;
+				if (!head->prev)
+					ref = head;
+				print_list(ref);
+				/*printf("%d\n", (*list)->n);*/
+			}
+			*list = (*list)->next;
+		}
+		*list = ref;
+	}
 }
