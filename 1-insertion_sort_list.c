@@ -5,11 +5,11 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *head;
-	listint_t *ref = *list;
+	listint_t *head, *ref;
 
 	if (list != NULL && *list != NULL)
 	{
+		ref = *list;
 		while ((*list) != NULL)
 		{
 			head = *list;
